@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-extension Clamp on Offset {
+extension ImageOffsetExtension on Offset {
   Offset clamp(Size imageSize, Size canvasSize) {
     double dx = this.dx;
     if (dx + imageSize.width > canvasSize.width) {
@@ -16,7 +16,8 @@ extension Clamp on Offset {
   }
 
   Offset toCenter(Size imageSize) {
-    return Offset(this.dx - (imageSize.width / 2), this.dy - (imageSize.height / 2));
+    return Offset(
+        this.dx - (imageSize.width / 2), this.dy - (imageSize.height / 2));
   }
 
   Offset toBottomCenter(Size imageSize) {

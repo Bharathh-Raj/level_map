@@ -29,6 +29,8 @@ class ImageParams {
     this.imagePositionFactor = 0.4,
     this.repeatCountPerLevel = 1,
     this.side = Side.BOTH,
-  })  : assert(imagePositionFactor >= 0 && imagePositionFactor <= 1, "Image Position factor should be between 0 and 1"),
-        assert(repeatCountPerLevel >= 0, "repeatPerLevel parameter should be positive");
+  })  : assert(imagePositionFactor >= 0 && imagePositionFactor <= 1,
+            "Image Position factor should be between 0 and 1"),
+        assert(repeatCountPerLevel >= 0,
+            "repeatPerLevel parameter should be positive");
 }

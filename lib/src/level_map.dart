@@ -26,7 +26,9 @@ class LevelMap extends StatelessWidget {
         child: SingleChildScrollView(
           controller: ScrollController(
               initialScrollOffset: (((scrollToCurrentLevel
-                          ? (levelMapParams.levelCount - levelMapParams.currentLevel + 2)
+                          ? (levelMapParams.levelCount -
+                              levelMapParams.currentLevel +
+                              2)
                           : levelMapParams.levelCount)) *
                       levelMapParams.levelHeight) -
                   constraints.maxHeight),
@@ -42,8 +44,10 @@ class LevelMap extends StatelessWidget {
               ),
               builder: (context, snapshot) {
                 return CustomPaint(
-                  size: Size(constraints.maxWidth, levelMapParams.levelCount * levelMapParams.levelHeight),
-                  painter: LevelMapPainter(params: levelMapParams, imagesToPaint: snapshot.data),
+                  size: Size(constraints.maxWidth,
+                      levelMapParams.levelCount * levelMapParams.levelHeight),
+                  painter: LevelMapPainter(
+                      params: levelMapParams, imagesToPaint: snapshot.data),
                 );
               },
             ),

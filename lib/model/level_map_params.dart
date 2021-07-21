@@ -86,9 +86,12 @@ class LevelMapParams {
     required this.currentLevelImage,
     required this.lockedLevelImage,
     this.pathEndImage,
-  })  : assert(currentLevel <= levelCount, "Current level should be less than total level count"),
-        assert(dashLengthFactor >= 0 && dashLengthFactor <= 0.5, "Dash length factor should be between 0 and 0.5"),
-        assert(100 % (dashLengthFactor * 100) == 0, "Dash length factor should be a factor of 1"),
+  })  : assert(currentLevel <= levelCount,
+            "Current level should be less than total level count"),
+        assert(dashLengthFactor >= 0 && dashLengthFactor <= 0.5,
+            "Dash length factor should be between 0 and 0.5"),
+        assert(100 % (dashLengthFactor * 100) == 0,
+            "Dash length factor should be a factor of 1"),
         assert(
             minReferencePositionOffsetFactor.dx <= 1 &&
                 minReferencePositionOffsetFactor.dx >= 0 &&
@@ -103,10 +106,18 @@ class LevelMapParams {
             "dx and dy of maxEndReferenceOffsetVariationFactor should be between 0 and 1"),
         this.curveReferenceOffsetVariationForEachLevel = List.generate(
             levelCount,
-            (index) => Offset((_random.nextBool() ? _random.nextDouble() : -_random.nextDouble()) * maxVariationFactor,
-                (_random.nextBool() ? _random.nextDouble() : -_random.nextDouble()) * maxVariationFactor),
+            (index) => Offset(
+                (_random.nextBool()
+                        ? _random.nextDouble()
+                        : -_random.nextDouble()) *
+                    maxVariationFactor,
+                (_random.nextBool()
+                        ? _random.nextDouble()
+                        : -_random.nextDouble()) *
+                    maxVariationFactor),
             growable: false) {
     this.firstCurveReferencePointOffsetFactor =
-        firstCurveReferencePointOffsetFactor ?? Offset(_random.nextDouble(), _random.nextDouble());
+        firstCurveReferencePointOffsetFactor ??
+            Offset(_random.nextDouble(), _random.nextDouble());
   }
 }
