@@ -6,9 +6,6 @@ import 'package:level_map/utils/image_offset_center_extension.dart';
 import '../model/bg_image.dart';
 import '../model/images_to_paint.dart';
 
-//TODO: IMPORVEMENTS
-//Shadow configuration inside LevelMapParams
-//Support for network image
 class LevelMapPainter extends CustomPainter {
   final LevelMapParams params;
   final ImagesToPaint? imagesToPaint;

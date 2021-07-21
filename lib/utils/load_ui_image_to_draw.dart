@@ -86,22 +86,10 @@ List<ui.Offset> _getImageOffsets(ImageParams imageParams, int levelCount, double
 Future<ImageInfo> _getUiImage(ImageParams imageParams) async {
   Completer<ImageInfo> completer = Completer();
   //TODO: Add network image functionality also.
-  //TODO: Add network image functionality also.
-  //TODO: Add network image functionality also.
   final AssetImage image = new AssetImage(imageParams.path);
   image.resolve(ImageConfiguration()).addListener(ImageStreamListener((ImageInfo info, bool _) {
     completer.complete(info);
   }));
   ImageInfo imageInfo = await completer.future;
   return imageInfo;
-  // final ByteData assetImageByteData = await rootBundle.load(imageParams.path);
-  // image.Image? baseSizeImage = image.decodeImage(assetImageByteData.buffer.asUint8List());
-  // if (baseSizeImage == null) {
-  //   return null;
-  // }
-  // image.Image resizeImage = image.copyResize(baseSizeImage,
-  //     height: imageParams.height, width: imageParams.width, interpolation: image.Interpolation.cubic);
-  // ui.Codec codec = await ui.instantiateImageCodec(Uint8List.fromList(image.encodePng(resizeImage)));
-  // ui.FrameInfo frameInfo = await codec.getNextFrame();
-  // return frameInfo.image;
 }
