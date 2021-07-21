@@ -56,7 +56,7 @@ class LevelMapParams {
   /// width/2 since the curve starts in center
   final Offset maxReferencePositionOffsetFactor;
 
-  final List<ImageParams>? pathOfBGImagesToBePaintedRandomly;
+  final List<ImageParams>? bgImagesToBePaintedRandomly;
 
   final ImageParams? startLevelImage;
   final ImageParams completedLevelImage;
@@ -64,8 +64,8 @@ class LevelMapParams {
   final ImageParams lockedLevelImage;
   final ImageParams? pathEndImage;
 
-  ///Note: If you see any hard edge, decrease the maxVariationFactor,else disable the enableVariationBetweenCurves parameter, Default is 0.2.
-  /// If you need the curves to be fixed in every build, set the enableVariationBetweenCurves to false and set the firstCurveReferencePointOffsetFactor, Default is random.
+  ///Note: If you see any hard edge, decrease the [maxVariationFactor],else disable the [enableVariationBetweenCurves] parameter, Default is 0.2.
+  /// If you need the curves to be fixed in every build, set the [enableVariationBetweenCurves] to false and set the [firstCurveReferencePointOffsetFactor], Default is random.
   LevelMapParams({
     required this.levelCount,
     required this.currentLevel,
@@ -80,7 +80,7 @@ class LevelMapParams {
     this.minReferencePositionOffsetFactor = const Offset(0.4, 0.3),
     this.maxReferencePositionOffsetFactor = const Offset(1, 0.7),
     this.firstCurveReferencePointOffsetFactor,
-    this.pathOfBGImagesToBePaintedRandomly,
+    this.bgImagesToBePaintedRandomly,
     this.startLevelImage,
     required this.completedLevelImage,
     required this.currentLevelImage,

@@ -1,9 +1,10 @@
+import 'dart:ui';
+
 import '../enum/image_side_enum.dart';
 
 class ImageParams {
   final String path;
-  final int height;
-  final int width;
+  final Size size;
 
   /// It determines how close the image could get to the center of the page.
   /// Should be between 0 and 1.
@@ -24,8 +25,7 @@ class ImageParams {
 
   ImageParams({
     required this.path,
-    required this.height,
-    required this.width,
+    required this.size,
     this.imagePositionFactor = 0.4,
     this.repeatCountPerLevel = 1,
     this.side = Side.BOTH,

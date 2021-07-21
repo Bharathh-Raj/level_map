@@ -1,29 +1,29 @@
 import 'dart:ui';
 
 extension Clamp on Offset {
-  Offset clamp(int imageHeight, int imageWidth, double canvasHeight, double canvasWidth) {
+  Offset clamp(Size imageSize, Size canvasSize) {
     double dx = this.dx;
-    if (dx + imageWidth > canvasWidth) {
-      dx = dx - imageWidth;
+    if (dx + imageSize.width > canvasSize.width) {
+      dx = dx - imageSize.width;
     }
     double dy = this.dy;
-    if (-dy < imageHeight) {
-      dy = -imageHeight.toDouble();
-    } else if (-dy > canvasHeight) {
-      dy = -canvasHeight;
+    if (-dy < imageSize.height) {
+      dy = -imageSize.height.toDouble();
+    } else if (-dy > canvasSize.height) {
+      dy = -canvasSize.height;
     }
     return Offset(dx, dy);
   }
 
-  Offset toCenter(int imageHeight, int imageWidth) {
-    return Offset(this.dx - (imageWidth / 2), this.dy - (imageHeight / 2));
+  Offset toCenter(Size imageSize) {
+    return Offset(this.dx - (imageSize.width / 2), this.dy - (imageSize.height / 2));
   }
 
-  Offset toBottomCenter(int imageHeight, int imageWidth) {
-    return Offset(this.dx - (imageWidth / 2), this.dy - imageHeight);
+  Offset toBottomCenter(Size imageSize) {
+    return Offset(this.dx - (imageSize.width / 2), this.dy - imageSize.height);
   }
 
-  Offset toTopCenter(int imageHeight, int imageWidth) {
+  Offset toTopCenter(double imageWidth) {
     return Offset(this.dx - (imageWidth / 2), this.dy);
   }
 }

@@ -1,13 +1,14 @@
-import 'dart:ui' as ui;
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:level_map/model/image_details.dart';
 import 'package:level_map/model/level_map_params.dart';
 import 'package:level_map/utils/image_offset_center_extension.dart';
 
 import '../model/bg_image.dart';
 import '../model/images_to_paint.dart';
 
+//TODO: IMPORVEMENTS
+//Shadow configuration inside LevelMapParams
+//Support for network image
 class LevelMapPainter extends CustomPainter {
   final LevelMapParams params;
   final ImagesToPaint? imagesToPaint;
@@ -60,9 +61,9 @@ class LevelMapPainter extends CustomPainter {
   void _drawBGImages(Canvas canvas) {
     final List<BGImage>? _bgImages = imagesToPaint!.bgImages;
     if (_bgImages != null) {
-      _bgImages.forEach((uiImage) {
-        uiImage.offsetsToBePainted.forEach((offset) {
-          canvas.drawImage(uiImage.image, offset, _pathPaint);
+      _bgImages.forEach((bgImage) {
+        bgImage.offsetsToBePainted.forEach((offset) {
+          _paintImage(canvas, bgImage.imageDetails, offset);
         });
       });
     }
@@ -70,17 +71,17 @@ class LevelMapPainter extends CustomPainter {
 
   void _drawStartLevelImage(Canvas canvas, double canvasWidth) {
     if (imagesToPaint!.startLevelImage != null) {
-      final ui.Image _startLevelImage = imagesToPaint!.startLevelImage!;
-      canvas.drawImage(_startLevelImage,
-          Offset(canvasWidth / 2, 0).toBottomCenter(_startLevelImage.height, _startLevelImage.width), _pathPaint);
+      final ImageDetails _startLevelImage = imagesToPaint!.startLevelImage!;
+      final Offset _offset = Offset(canvasWidth / 2, 0).toBottomCenter(_startLevelImage.size);
+      _paintImage(canvas, _startLevelImage, _offset);
     }
   }
 
   void _drawPathEndImage(Canvas canvas, double canvasWidth, double canvasHeight) {
     if (imagesToPaint!.pathEndImage != null) {
-      final ui.Image _pathEndImage = imagesToPaint!.pathEndImage!;
-      canvas.drawImage(_pathEndImage,
-          Offset(canvasWidth / 2, -canvasHeight).toTopCenter(_pathEndImage.height, _pathEndImage.width), _pathPaint);
+      final ImageDetails _pathEndImage = imagesToPaint!.pathEndImage!;
+      final Offset _offset = Offset(canvasWidth / 2, -canvasHeight).toTopCenter(_pathEndImage.size.width);
+      _paintImage(canvas, _pathEndImage, _offset);
     }
   }
 
@@ -116,16 +117,23 @@ class LevelMapPainter extends CustomPainter {
     }
     if (imagesToPaint != null) {
       final Offset _offsetToPaintImage = Offset(_compute(0.5, p1.dx, p2.dx, p3.dx), _compute(0.5, p1.dy, p2.dy, p3.dy));
-      ui.Image image = imagesToPaint!.lockedLevelImage;
+      ImageDetails imageDetails = imagesToPaint!.lockedLevelImage;
       if (params.currentLevel > currentLevel) {
-        image = imagesToPaint!.completedLevelImage;
+        imageDetails = imagesToPaint!.completedLevelImage;
       } else if (params.currentLevel == currentLevel) {
-        image = imagesToPaint!.currentLevelImage;
+        imageDetails = imagesToPaint!.currentLevelImage;
       } else {
-        image = imagesToPaint!.lockedLevelImage;
+        imageDetails = imagesToPaint!.lockedLevelImage;
       }
-      canvas.drawImage(image, _offsetToPaintImage.toCenter(image.height, image.width), _pathPaint);
+      _paintImage(canvas, imageDetails, _offsetToPaintImage.toCenter(imageDetails.size));
     }
+  }
+
+  void _paintImage(Canvas canvas, ImageDetails imageDetails, Offset offset) {
+    paintImage(
+        canvas: canvas,
+        rect: Rect.fromLTWH(offset.dx, offset.dy, imageDetails.size.width, imageDetails.size.height),
+        image: imageDetails.imageInfo.image);
   }
 
   double _compute(double t, double p1, double p2, double p3) {
