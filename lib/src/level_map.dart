@@ -33,7 +33,7 @@ class LevelMap extends StatelessWidget {
                       levelMapParams.levelHeight) -
                   constraints.maxHeight),
           // physics: FixedExtentScrollPhysics(),
-          child: Container(
+          child: ColoredBox(
             color: backgroundColor,
             child: FutureBuilder<ImagesToPaint?>(
               future: loadImagesToPaint(
