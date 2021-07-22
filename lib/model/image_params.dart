@@ -20,7 +20,7 @@ class ImageParams {
   /// 0.5 means it appear once every two levels.
   final double repeatCountPerLevel;
 
-  /// If an image need to be panted only on left or right, set this parameter.
+  /// If an image need to be painted only on left or right to the path, set this parameter.
   final Side side;
 
   ImageParams({

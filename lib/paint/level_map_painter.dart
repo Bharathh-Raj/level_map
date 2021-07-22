@@ -14,11 +14,11 @@ class LevelMapPainter extends CustomPainter {
 
   LevelMapPainter({required this.params, this.imagesToPaint})
       : _pathPaint = Paint()
-          ..strokeWidth = params.strokeWidth
+          ..strokeWidth = params.pathStrokeWidth
           ..color = params.pathColor
           ..strokeCap = StrokeCap.round,
         _shadowPaint = Paint()
-          ..strokeWidth = params.strokeWidth
+          ..strokeWidth = params.pathStrokeWidth
           ..color = params.pathColor.withOpacity(0.2)
           ..strokeCap = StrokeCap.round;
 

@@ -8,19 +8,28 @@ class LevelMapParams {
   static final _random = math.Random();
   final int levelCount;
   final int currentLevel;
-  final double strokeWidth;
+
+  /// Determines the stroke width of the path lines.
+  /// Default is 3.
+  final double pathStrokeWidth;
   final Color pathColor;
 
-  /// This determines the curve height
+  /// Default is 200.
   final double levelHeight;
 
-  /// Used to adjust the length of the dash
-  /// Should be between 0 and 0.5
+  /// Used to adjust the length of the dash.
+  /// Should be between 0 and 0.5.
+  /// Default is 0.025.
   final double dashLengthFactor;
+
+  /// If set to false, there won't be any variation between curves, all curves are identical.
+  /// Default is true.
   final bool enableVariationBetweenCurves;
 
-  /// Determines max offset variation between curves
-  /// Affects only if enableVariationBetweenCurves flag is set to true
+  /// Determines max offset variation between curves.
+  /// Affects only if [enableVariationBetweenCurves] flag is set to true.
+  /// Note: Having huge [maxVariationFactor]  causes hard edges. Ideal value is between 0 and 1 (may vary based on the [levelHeight]).
+  /// Default is 0.2.
   final double maxVariationFactor;
 
   /// Determines the position of the reference point of the first curve.
@@ -28,7 +37,13 @@ class LevelMapParams {
   /// Offset factor should be between 0 and 1.
   /// Default is random.
   late Offset? firstCurveReferencePointOffsetFactor;
+
+  /// List of reference point offset of each level.
+  /// Affects only if [enableVariationBetweenCurves] flag is set to true
+  /// Helps to position the reference point for each curve.
+  /// Default is random.
   final List<Offset> curveReferenceOffsetVariationForEachLevel;
+
   final bool showPathShadow;
 
   /// Determines how far the shadows should cast.
@@ -58,10 +73,19 @@ class LevelMapParams {
 
   final List<ImageParams>? bgImagesToBePaintedRandomly;
 
+  /// It is the image positioned in the bottom center of the level map to indicate the start position.
   final ImageParams? startLevelImage;
+
+  /// It is the image positioned on top of the completed levels of the level map to indicate the level is completed.
   final ImageParams completedLevelImage;
+
+  /// It is the image positioned on top of the current level of the level map to indicate the current position of the user.
   final ImageParams currentLevelImage;
+
+  /// It is the image positioned on top of the upcoming levels of the level map to indicate those levels are yet to unlock.
   final ImageParams lockedLevelImage;
+
+  /// It is the image positioned in the top center of the level map to indicate the end of the level map.
   final ImageParams? pathEndImage;
 
   ///Note: If you see any hard edge, decrease the [maxVariationFactor],else disable the [enableVariationBetweenCurves] parameter, Default is 0.2.
@@ -71,7 +95,7 @@ class LevelMapParams {
     required this.currentLevel,
     this.pathColor = Colors.black,
     this.levelHeight = 200,
-    this.strokeWidth = 3,
+    this.pathStrokeWidth = 3,
     this.dashLengthFactor = 0.025,
     this.enableVariationBetweenCurves = true,
     this.maxVariationFactor = 0.2,
