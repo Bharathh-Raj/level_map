@@ -157,5 +157,10 @@ class ImageParams {
 ```
 ## Example Project
 [![support](https://img.shields.io/badge/github-level__map-brightgreen?style=flat)](https://github.com/Bharathh-Raj/level_map)
-![level_map_sample_1](https://i.imgur.com/WJ7qyMi.png) ![level_map_sample_1](https://i.imgur.com/r9MJ1xI.png)
+![level_map_sample_1](https://i.imgur.com/WJ7qyMi.png) ![level_map_sample_2](https://i.imgur.com/4UXqOX6.png)
 [![support](https://img.shields.io/badge/github-level__map-brightgreen?style=flat)](https://github.com/Bharathh-Raj/level_map)
+
+## Features and bugs
+Please file feature requests and bugs at the [issue tracker][tracker].
+
+[tracker]: https://github.com/Bharathh-Raj/level_map/issues
