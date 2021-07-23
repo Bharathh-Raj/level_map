@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:level_map/level_map.dart';
-import 'package:level_map/model/image_params.dart';
-import 'package:level_map/model/level_map_params.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,22 +9,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(),
+      home: LevelMapPage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class LevelMapPage extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _LevelMapPageState createState() => _LevelMapPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _LevelMapPageState extends State<LevelMapPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -36,11 +29,7 @@ class _MyHomePageState extends State<MyHomePage> {
           levelMapParams: LevelMapParams(
             levelCount: 5,
             currentLevel: 2,
-            levelHeight: 200,
             pathColor: Colors.black,
-            strokeWidth: 3,
-            dashLengthFactor: 0.025,
-            firstCurveReferencePointOffsetFactor: Offset(0.5, 0.5),
             currentLevelImage: ImageParams(
               path: "assets/images/current_black.png",
               size: Size(40, 47),
@@ -65,13 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ImageParams(path: "assets/images/Energy equivalency.png", size: Size(80, 80), repeatCountPerLevel: 0.5),
               ImageParams(path: "assets/images/Astronomy.png", size: Size(80, 80), repeatCountPerLevel: 0.25),
               ImageParams(path: "assets/images/Atom.png", size: Size(80, 80), repeatCountPerLevel: 0.25),
-              // ImageParams(path: "assets/images/Boy Graduation.png", size: Size(80, 80), repeatCountPerLevel: 0.25),
-              // ImageParams(path: "assets/images/Boy Study.png", size: Size(80, 80), repeatCountPerLevel: 0.25),
               ImageParams(path: "assets/images/Certificate.png", size: Size(80, 80), repeatCountPerLevel: 0.25),
-              // ImageParams(path: "assets/images/Geology.png", size: Size(80, 80), repeatCountPerLevel: 0.15),
-              // ImageParams(path: "assets/images/Graduation Cap.png", size: Size(80, 80), repeatCountPerLevel: 0.15),
-              // ImageParams(path: "assets/images/Math.png", size: Size(80, 80), repeatCountPerLevel: 0.15),
-              // ImageParams(path: "assets/images/Notes.png", size: Size(80, 80), repeatCountPerLevel: 0.15),
             ],
           ),
         ),
@@ -82,7 +65,9 @@ class _MyHomePageState extends State<MyHomePage> {
             color: Colors.white,
           ),
           onPressed: () {
-            setState(() {});
+            setState(() {
+              //Just to visually see the change of path's curve.
+            });
           },
         ),
       ),
