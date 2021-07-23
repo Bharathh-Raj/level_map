@@ -10,7 +10,7 @@ A Flutter library to add level-map feature with powerful customization options.
 
 ```yaml
 dependencies:
-  level_map: ^0.1.3
+  level_map: ^0.1.4
 ```
 
 ### Super simple to use
@@ -156,9 +156,9 @@ class ImageParams {
 }
 ```
 ## Example Project
-[![support](https://img.shields.io/badge/github-level__map-brightgreen?style=flat)](https://github.com/Bharathh-Raj/level_map)
+
 ![level_map_sample_1](https://i.imgur.com/WJ7qyMi.png) ![level_map_sample_2](https://i.imgur.com/4UXqOX6.png)
-[![support](https://img.shields.io/badge/github-level__map-brightgreen?style=flat)](https://github.com/Bharathh-Raj/level_map)
+[![support](https://img.shields.io/badge/github-level__map-brightgreen?style=flat)](https://github.com/Bharathh-Raj/level_map/tree/main/example)
 
 ## Features and bugs
 Please file feature requests and bugs at the [issue tracker][tracker].
