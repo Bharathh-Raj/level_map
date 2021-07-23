@@ -23,7 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  level_map: ^0.1.2+2
+  level_map:
+    path: ../
 
 dev_dependencies:
   flutter_test:
