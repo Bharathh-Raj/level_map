@@ -1,6 +1,6 @@
 import 'dart:ui' as ui;
 
-import 'package:level_map/model/image_details.dart';
+import 'package:level_map/src/model/image_details.dart';
 
 class BGImage {
   final ImageDetails imageDetails;

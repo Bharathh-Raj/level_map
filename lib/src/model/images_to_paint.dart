@@ -1,5 +1,5 @@
-import 'package:level_map/model/bg_image.dart';
-import 'package:level_map/model/image_details.dart';
+import 'package:level_map/src/model/bg_image.dart';
+import 'package:level_map/src/model/image_details.dart';
 
 class ImagesToPaint {
   final List<BGImage>? bgImages;

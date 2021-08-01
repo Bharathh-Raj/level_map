@@ -3,12 +3,12 @@ import 'dart:math' as math;
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:level_map/enum/image_side_enum.dart';
-import 'package:level_map/model/bg_image.dart';
-import 'package:level_map/model/image_details.dart';
-import 'package:level_map/model/image_params.dart';
-import 'package:level_map/model/images_to_paint.dart';
-import 'package:level_map/model/level_map_params.dart';
+import 'package:level_map/src/enum/image_side_enum.dart';
+import 'package:level_map/src/model/bg_image.dart';
+import 'package:level_map/src/model/image_details.dart';
+import 'package:level_map/src/model/image_params.dart';
+import 'package:level_map/src/model/images_to_paint.dart';
+import 'package:level_map/src/model/level_map_params.dart';
 
 import 'image_offset_extension.dart';
 

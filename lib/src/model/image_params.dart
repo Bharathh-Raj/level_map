@@ -2,8 +2,6 @@ import 'dart:ui';
 
 import 'package:level_map/level_map.dart';
 
-import '../enum/image_side_enum.dart';
-
 class ImageParams {
   final String path;
   final Size size;

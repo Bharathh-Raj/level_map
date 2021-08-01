@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:level_map/model/images_to_paint.dart';
-import 'package:level_map/model/level_map_params.dart';
-import 'package:level_map/paint/level_map_painter.dart';
-import 'package:level_map/utils/load_ui_image_to_draw.dart';
-import 'package:level_map/utils/scroll_behaviour.dart';
+import 'package:level_map/src/model/images_to_paint.dart';
+import 'package:level_map/src/model/level_map_params.dart';
+import 'package:level_map/src/paint/level_map_painter.dart';
+import 'package:level_map/src/utils/load_ui_image_to_draw.dart';
+import 'package:level_map/src/utils/scroll_behaviour.dart';
 
 class LevelMap extends StatelessWidget {
   final LevelMapParams levelMapParams;

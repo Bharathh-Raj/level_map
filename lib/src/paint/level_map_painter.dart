@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:level_map/model/image_details.dart';
-import 'package:level_map/model/level_map_params.dart';
-import 'package:level_map/utils/image_offset_extension.dart';
-
-import '../model/bg_image.dart';
-import '../model/images_to_paint.dart';
+import 'package:level_map/src/model/bg_image.dart';
+import 'package:level_map/src/model/image_details.dart';
+import 'package:level_map/src/model/images_to_paint.dart';
+import 'package:level_map/src/model/level_map_params.dart';
+import 'package:level_map/src/utils/image_offset_extension.dart';
 
 class LevelMapPainter extends CustomPainter {
   final LevelMapParams params;
