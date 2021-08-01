@@ -12,6 +12,10 @@ class LevelMapPainter extends CustomPainter {
   final Paint _pathPaint;
   final Paint _shadowPaint;
 
+  /// Describes the fraction to reach next level.
+  /// If the [LevelMapParams.currentLevel] is 6.5, [_nextLevelFraction] is 0.5.
+  final double _nextLevelFraction;
+
   LevelMapPainter({required this.params, this.imagesToPaint})
       : _pathPaint = Paint()
           ..strokeWidth = params.pathStrokeWidth
@@ -20,7 +24,9 @@ class LevelMapPainter extends CustomPainter {
         _shadowPaint = Paint()
           ..strokeWidth = params.pathStrokeWidth
           ..color = params.pathColor.withOpacity(0.2)
-          ..strokeCap = StrokeCap.round;
+          ..strokeCap = StrokeCap.round,
+        _nextLevelFraction =
+            params.currentLevel.remainder(params.currentLevel.floor());
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -38,23 +44,20 @@ class LevelMapPainter extends CustomPainter {
         params.firstCurveReferencePointOffsetFactor!.dx;
     double _p2_dy_VariationFactor =
         params.firstCurveReferencePointOffsetFactor!.dy;
-    for (int currentLevel = 0;
-        currentLevel < params.levelCount;
-        currentLevel++) {
-      final Offset p1 =
-          Offset(_centerWidth, -(currentLevel * params.levelHeight));
-      final Offset p2 = getP2OffsetBasedOnCurveSide(currentLevel,
+    for (int thisLevel = 0; thisLevel < params.levelCount; thisLevel++) {
+      final Offset p1 = Offset(_centerWidth, -(thisLevel * params.levelHeight));
+      final Offset p2 = getP2OffsetBasedOnCurveSide(thisLevel,
           _p2_dx_VariationFactor, _p2_dy_VariationFactor, _centerWidth);
       final Offset p3 = Offset(_centerWidth,
-          -((currentLevel * params.levelHeight) + params.levelHeight));
+          -((thisLevel * params.levelHeight) + params.levelHeight));
 
-      _drawBezierCurve(canvas, p1, p2, p3, currentLevel + 1);
+      _drawBezierCurve(canvas, p1, p2, p3, thisLevel + 1);
 
       if (params.enableVariationBetweenCurves) {
         _p2_dx_VariationFactor = _p2_dx_VariationFactor +
-            params.curveReferenceOffsetVariationForEachLevel[currentLevel].dx;
+            params.curveReferenceOffsetVariationForEachLevel[thisLevel].dx;
         _p2_dy_VariationFactor = _p2_dy_VariationFactor +
-            params.curveReferenceOffsetVariationForEachLevel[currentLevel].dy;
+            params.curveReferenceOffsetVariationForEachLevel[thisLevel].dy;
       }
     }
 
@@ -92,7 +95,7 @@ class LevelMapPainter extends CustomPainter {
   }
 
   Offset getP2OffsetBasedOnCurveSide(
-      int currentLevel,
+      int thisLevel,
       double p2_dx_VariationFactor,
       double p2_dy_VariationFactor,
       double centerWidth) {
@@ -102,17 +105,17 @@ class LevelMapPainter extends CustomPainter {
     final double clamped_dyFactor = p2_dy_VariationFactor.clamp(
         params.minReferencePositionOffsetFactor.dy,
         params.maxReferencePositionOffsetFactor.dy);
-    final double p2_dx = currentLevel.isEven
+    final double p2_dx = thisLevel.isEven
         ? centerWidth * (1 - clamped_dxFactor)
         : centerWidth + (centerWidth * clamped_dxFactor);
-    final double p2_dy = -((currentLevel * params.levelHeight) +
+    final double p2_dy = -((thisLevel * params.levelHeight) +
         (params.levelHeight *
-            (currentLevel.isEven ? clamped_dyFactor : 1 - clamped_dyFactor)));
+            (thisLevel.isEven ? clamped_dyFactor : 1 - clamped_dyFactor)));
     return Offset(p2_dx, p2_dy);
   }
 
   void _drawBezierCurve(
-      Canvas canvas, Offset p1, Offset p2, Offset p3, int currentLevel) {
+      Canvas canvas, Offset p1, Offset p2, Offset p3, int thisLevel) {
     final double _dashFactor = params.dashLengthFactor;
     //TODO: Customise the empty dash length with this multiplication factor 2.
     for (double t = _dashFactor; t <= 1; t += _dashFactor * 2) {
@@ -134,16 +137,30 @@ class LevelMapPainter extends CustomPainter {
       final Offset _offsetToPaintImage = Offset(
           _compute(0.5, p1.dx, p2.dx, p3.dx),
           _compute(0.5, p1.dy, p2.dy, p3.dy));
-      ImageDetails imageDetails = imagesToPaint!.lockedLevelImage;
-      if (params.currentLevel > currentLevel) {
+      ImageDetails imageDetails;
+      if (params.currentLevel >= thisLevel) {
         imageDetails = imagesToPaint!.completedLevelImage;
-      } else if (params.currentLevel == currentLevel) {
-        imageDetails = imagesToPaint!.currentLevelImage;
       } else {
         imageDetails = imagesToPaint!.lockedLevelImage;
       }
       _paintImage(canvas, imageDetails,
-          _offsetToPaintImage.toCenter(imageDetails.size));
+          _offsetToPaintImage.toBottomCenter(imageDetails.size));
+      final double _curveFraction;
+      final int _flooredCurrentLevel = params.currentLevel.floor();
+      if (_flooredCurrentLevel == thisLevel && _nextLevelFraction <= 0.5) {
+        _curveFraction = 0.5 + _nextLevelFraction;
+        // _paintImage(canvas, imagesToPaint!.currentLevelImage, _offsetToPaintImage.toCenter(imageDetails.size));
+      } else if (_flooredCurrentLevel == thisLevel - 1 &&
+          _nextLevelFraction > 0.5) {
+        _curveFraction = _nextLevelFraction - 0.5;
+      } else {
+        return;
+      }
+      final Offset _offsetToPaintCurrentLevelImage = Offset(
+          _compute(_curveFraction, p1.dx, p2.dx, p3.dx),
+          _compute(_curveFraction, p1.dy, p2.dy, p3.dy));
+      _paintImage(canvas, imagesToPaint!.currentLevelImage,
+          _offsetToPaintCurrentLevelImage.toBottomCenter(imageDetails.size));
     }
   }
 

@@ -27,8 +27,8 @@ class _LevelMapPageState extends State<LevelMapPage> {
         body: LevelMap(
           backgroundColor: Colors.limeAccent,
           levelMapParams: LevelMapParams(
-            levelCount: 5,
-            currentLevel: 2,
+            levelCount: 4,
+            currentLevel: 2.5,
             pathColor: Colors.black,
             currentLevelImage: ImageParams(
               path: "assets/images/current_black.png",
@@ -36,11 +36,11 @@ class _LevelMapPageState extends State<LevelMapPage> {
             ),
             lockedLevelImage: ImageParams(
               path: "assets/images/locked_black.png",
-              size: Size(51, 54),
+              size: Size(40, 42),
             ),
             completedLevelImage: ImageParams(
               path: "assets/images/completed_black.png",
-              size: Size(51, 54),
+              size: Size(40, 42),
             ),
             startLevelImage: ImageParams(
               path: "assets/images/Boy Study.png",
@@ -51,10 +51,22 @@ class _LevelMapPageState extends State<LevelMapPage> {
               size: Size(60, 60),
             ),
             bgImagesToBePaintedRandomly: [
-              ImageParams(path: "assets/images/Energy equivalency.png", size: Size(80, 80), repeatCountPerLevel: 0.5),
-              ImageParams(path: "assets/images/Astronomy.png", size: Size(80, 80), repeatCountPerLevel: 0.25),
-              ImageParams(path: "assets/images/Atom.png", size: Size(80, 80), repeatCountPerLevel: 0.25),
-              ImageParams(path: "assets/images/Certificate.png", size: Size(80, 80), repeatCountPerLevel: 0.25),
+              ImageParams(
+                  path: "assets/images/Energy equivalency.png",
+                  size: Size(80, 80),
+                  repeatCountPerLevel: 0.5),
+              ImageParams(
+                  path: "assets/images/Astronomy.png",
+                  size: Size(80, 80),
+                  repeatCountPerLevel: 0.25),
+              ImageParams(
+                  path: "assets/images/Atom.png",
+                  size: Size(80, 80),
+                  repeatCountPerLevel: 0.25),
+              ImageParams(
+                  path: "assets/images/Certificate.png",
+                  size: Size(80, 80),
+                  repeatCountPerLevel: 0.25),
             ],
           ),
         ),

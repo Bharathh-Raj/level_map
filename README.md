@@ -24,7 +24,7 @@ class LevelMapPage extends StatelessWidget {
             backgroundColor: Colors.limeAccent,
             levelMapParams: LevelMapParams(
                 levelCount: 5,
-                currentLevel: 2,
+                currentLevel: 2.4,
                 currentLevelImage: ImageParams(
                   path: "<image asset path here>",
                   size: Size(imageWidth,imageHeight),
@@ -48,7 +48,10 @@ class LevelMapPage extends StatelessWidget {
 ```dart
 class LevelMapParams {
   final int levelCount;
-  final int currentLevel;
+  
+  /// Determines the current level of the user.
+  /// If the user is in between levels, use decimal.
+  late final double currentLevel;
 
   /// Determines the stroke width of the path lines.
   /// Default is 3.

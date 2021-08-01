@@ -7,7 +7,10 @@ import 'image_params.dart';
 class LevelMapParams {
   static final _random = math.Random();
   final int levelCount;
-  final int currentLevel;
+
+  /// Determines the current level of the user.
+  /// If the user is in between levels, use decimal.
+  late final double currentLevel;
 
   /// Determines the stroke width of the path lines.
   /// Default is 3.
@@ -92,7 +95,7 @@ class LevelMapParams {
   /// If you need the curves to be fixed in every build, set the [enableVariationBetweenCurves] to false and set the [firstCurveReferencePointOffsetFactor], Default is random.
   LevelMapParams({
     required this.levelCount,
-    required this.currentLevel,
+    required double currentLevel,
     this.pathColor = Colors.black,
     this.levelHeight = 200,
     this.pathStrokeWidth = 3,
@@ -112,6 +115,7 @@ class LevelMapParams {
     this.pathEndImage,
   })  : assert(currentLevel <= levelCount,
             "Current level should be less than total level count"),
+        assert(currentLevel >= 1, "Current level should at least be 1"),
         assert(dashLengthFactor >= 0 && dashLengthFactor <= 0.5,
             "Dash length factor should be between 0 and 0.5"),
         assert(100 % (dashLengthFactor * 100) == 0,
@@ -140,6 +144,7 @@ class LevelMapParams {
                         : -_random.nextDouble()) *
                     maxVariationFactor),
             growable: false) {
+    this.currentLevel = currentLevel.clamp(1, levelCount).toDouble();
     this.firstCurveReferencePointOffsetFactor =
         firstCurveReferencePointOffsetFactor ??
             Offset(_random.nextDouble(), _random.nextDouble());
