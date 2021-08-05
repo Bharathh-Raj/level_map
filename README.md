@@ -10,7 +10,7 @@ A Flutter library to add level-map feature with powerful customization options.
 
 ```yaml
 dependencies:
-  level_map: ^0.1.4
+  level_map: ^0.2.0
 ```
 
 ### Super simple to use
