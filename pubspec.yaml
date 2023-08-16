@@ -5,8 +5,8 @@ version: 0.2.0
 homepage: https://github.com/Bharathh-Raj/level_map
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
-  flutter: ">=1.17.0"
+  sdk: ">=2.12.0 <4.0.0"
+  flutter: ">=2.0.0"
 
 dependencies:
   flutter:
