@@ -1,9 +1,11 @@
+import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:level_map/level_map.dart';
 
 class ImageParams {
-  final String path;
+  final Uint8List? bytes;
+  final String? path;
   final Size size;
 
   /// It determines how close the image could get to the center of the page.
@@ -27,7 +29,8 @@ class ImageParams {
   final Side side;
 
   ImageParams({
-    required this.path,
+    this.path,
+    this.bytes,
     required this.size,
     this.imagePositionFactor = 0.4,
     this.repeatCountPerLevel = 0.5,
@@ -35,5 +38,7 @@ class ImageParams {
   })  : assert(imagePositionFactor >= 0 && imagePositionFactor <= 1,
             "Image Position factor should be between 0 and 1"),
         assert(repeatCountPerLevel >= 0,
-            "repeatPerLevel parameter should be positive");
+            "repeatPerLevel parameter should be positive"),
+        assert(path != null || bytes != null,
+            'The image path or Uint8List bytes can not be both null');
 }
