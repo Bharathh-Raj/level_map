@@ -25,6 +25,8 @@ dependencies:
     sdk: flutter
   level_map:
     path: ../
+  screenshot: ^2.1.0
+  path_provider: ^2.0.15
 
 dev_dependencies:
   flutter_test:
